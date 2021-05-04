@@ -1,39 +1,42 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import Login from "./login/Login";
-import Register from "./register/Register";
-
-import { Link } from "react-router-dom";
+import LoginRegister from "./loginRegister/LoginRegister";
+import useStyles from "./styles";
 
 const Account = ({ loggedIn, setLoggedIn }) => {
+  const classes = useStyles();
+
   const LoggedIn = () => (
     <>
-      <p>Zalogowany</p>
-
-      <button onClick={() => setLoggedIn(false)}>Wyloguj mnie</button>
+      <div className={classes.center}>
+        <p style={{ margin: 0 }}>niezalogowany</p>
+        <button onClick={() => setLoggedIn(false)}>Wyloguj mnie</button>
+      </div>
     </>
   );
 
   const NotLoggedIn = () => (
     <>
-      <p>niezalogowany</p>
-      <Link to="/account/login">Zaloguj się tutaj!</Link>
+      <div className={classes.center}>
+        <p style={{ margin: 0 }}>niezalogowany</p>
+        <Link to="/account/login">Zaloguj się tutaj!</Link>
+      </div>
     </>
   );
 
   return (
     <main>
-      <div style={{ marginTop: "100px" }} />
+      <div className={classes.margin} />
       {loggedIn ? <LoggedIn /> : <NotLoggedIn />}
       <Router>
         <Switch>
           <Route exact path="/account/register">
-            <Register />
+            <LoginRegister />
           </Route>
           <Route exact path="/account/login">
-            <Login />
+            <LoginRegister />
           </Route>
         </Switch>
       </Router>

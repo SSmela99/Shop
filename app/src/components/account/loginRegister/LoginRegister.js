@@ -23,7 +23,9 @@ const LoginRegister = ({ loggedIn, setLoggedIn }) => {
   const Login = () => (
     <div className={classes.account}>
       <form onSubmit={onSubmit} className={classes.form} autoComplete="off">
-        <Typography variant="h6">Logowanie</Typography>
+        <Typography variant="h6" className={classes.title}>
+          Logowanie
+        </Typography>
         <TextField
           name="username"
           label="username"
@@ -61,7 +63,9 @@ const LoginRegister = ({ loggedIn, setLoggedIn }) => {
   const Register = () => (
     <div className={classes.account}>
       <form onSubmit={onSubmit} className={classes.form} autoComplete="off">
-        <Typography variant="h6">Rejestracja</Typography>
+        <Typography variant="h6" className={classes.title}>
+          Rejestracja
+        </Typography>
         <TextField
           name="username"
           label="username"
@@ -103,7 +107,7 @@ const LoginRegister = ({ loggedIn, setLoggedIn }) => {
           placeholder="hasło"
           type="password"
         />
-        <div style={{ display: "flex", maxWidth: "320px" }}>
+        <div className={classes.checkbox}>
           <Checkbox required color="primary" style={{ height: "30px" }} />
           <Typography variant="subtitle2" color="textSecondary">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris

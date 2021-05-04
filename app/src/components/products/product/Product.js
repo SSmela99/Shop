@@ -52,14 +52,6 @@ const Product = ({ product, addToCart, setId }) => {
         </CardContent>
         <CardActions>
           <Button
-            onClick={() => console.log(product.title, product.id)}
-            variant="contained"
-            color="primary"
-            className={classes.button}
-          >
-            klik
-          </Button>
-          <Button
             onClick={() => addToCart(product)}
             style={{
               position: "absolute",

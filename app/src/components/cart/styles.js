@@ -9,4 +9,10 @@ export default makeStyles((theme) => ({
       transition: ".5s",
     },
   },
+  center: {
+    minHeight: "calc(100vh - 100px)",
+    [theme.breakpoints.down("sm")]: {
+      minHeight: "calc(100vh - 70px)",
+    },
+  },
 }));

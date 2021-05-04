@@ -10,6 +10,7 @@ import {
   Button,
   Container,
   IconButton,
+  Box,
 } from "@material-ui/core";
 import BackspaceIcon from "@material-ui/icons/Backspace";
 
@@ -29,36 +30,41 @@ const CartItem = ({ cartItem, addToCart, removeFromCart, deleteItem }) => {
             title={cartItem.title}
             className={classes.image}
           />
-          <CardContent>
-            <Typography variant="subtitle2">{cartItem.title}</Typography>
-            <Typography variant="subtitle2">{cartItem.price} PLN</Typography>
-          </CardContent>
-          <div className={classes.grow} />
-          <CardContent>
-            <Typography>{itemSummary} PLN</Typography>
-          </CardContent>
-          <CardActions>
-            <Button
-              variant="contained"
-              style={{ minWidth: "40px" }}
-              onClick={() => addToCart(cartItem)}
-              className={classes.cartButton}
-            >
-              +
-            </Button>
-            <Typography variant="subtitle2">{cartItem.qty}</Typography>
-            <Button
-              variant="contained"
-              style={{ minWidth: "40px" }}
-              className={classes.cartButton}
-              onClick={() => removeFromCart(cartItem)}
-            >
-              -
-            </Button>
-            <IconButton onClick={() => deleteItem(cartItem)}>
-              <BackspaceIcon />
-            </IconButton>
-          </CardActions>
+          <Box className={classes.box}>
+            <CardContent style={{ paddingRight: 0 }}>
+              <Typography variant="subtitle2">{cartItem.title}</Typography>
+              <Typography variant="subtitle2">{cartItem.price} PLN</Typography>
+            </CardContent>
+            <div className={classes.grow} />
+            <CardContent className={classes.totalPrize}>
+              <Typography>{itemSummary} PLN</Typography>
+            </CardContent>
+            <CardActions className={classes.actions}>
+              <Button
+                variant="contained"
+                style={{ minWidth: "40px" }}
+                onClick={() => addToCart(cartItem)}
+                className={classes.cartButton}
+              >
+                +
+              </Button>
+              <span>{cartItem.qty}</span>
+              <Button
+                variant="contained"
+                style={{ minWidth: "40px" }}
+                className={classes.cartButton}
+                onClick={() => removeFromCart(cartItem)}
+              >
+                -
+              </Button>
+              <IconButton
+                onClick={() => deleteItem(cartItem)}
+                className={classes.deleteBtn}
+              >
+                <BackspaceIcon />
+              </IconButton>
+            </CardActions>
+          </Box>
         </Card>
       </Container>
     </>

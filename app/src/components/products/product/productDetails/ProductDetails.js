@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 
+import Loading from "../../../extras/loading/Loading";
 import {
   Card,
   CardActions,
@@ -40,63 +41,52 @@ const ProductDetails = ({ addToCart }) => {
     fetchData();
   }, []);
 
-  const Loading = () => (
-    <div className={classes.loading}>
-      <div className={classes.loadingCircle}></div>
-      <div className={classes.loadingCircle}></div>
-      <div className={classes.loadingCircle}></div>
-    </div>
-  );
-
   const DetailedProduct = () => (
     <>
-      <Container>
-        <Card className={classes.root}>
-          <CardContent style={{ display: "flex" }}>
-            <CardMedia
-              image={product.image}
-              title={product.title}
-              // style={{ width: "200px", height: "200px" }}
-              className={classes.image}
-            />
-            <div>
-              <Typography className={classes.text} variant="h4" gutterBottom>
-                {product.title}
-              </Typography>
-              <Typography className={classes.text} variant="h6" gutterBottom>
-                {product.price} PLN
-              </Typography>
-              <Typography
-                variant="subtitle1"
-                color="textSecondary"
-                gutterBottom
-                className={(classes.text, classes.desc)}
-              >
-                {product.description}
-              </Typography>
-              <CardActions>
-                <div style={{ flexGrow: 1 }} />
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => addToCart(product)}
+      <div className={classes.margin} />
+      <div className={classes.center}>
+        <Container>
+          <Card className={classes.root} style={{ marginBottom: "30px" }}>
+            <CardContent className={classes.content}>
+              <CardMedia
+                image={product.image}
+                title={product.title}
+                className={classes.image}
+              />
+              <div>
+                <Typography className={classes.text} variant="h4">
+                  {product.title}
+                </Typography>
+                <Typography className={classes.text} variant="h6" gutterBottom>
+                  {product.price} PLN
+                </Typography>
+                <Typography
+                  variant="subtitle1"
+                  color="textSecondary"
+                  gutterBottom
+                  className={(classes.text, classes.desc)}
                 >
-                  Dodaj do koszyka
-                </Button>
-              </CardActions>
-            </div>
-          </CardContent>
-        </Card>
-      </Container>
+                  {product.description}
+                </Typography>
+                <CardActions>
+                  <div style={{ flexGrow: 1 }} />
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => addToCart(product)}
+                  >
+                    Dodaj do koszyka
+                  </Button>
+                </CardActions>
+              </div>
+            </CardContent>
+          </Card>
+        </Container>
+      </div>
     </>
   );
 
-  return (
-    <main>
-      <div className={classes.margin} />
-      {isLoading ? <Loading /> : <DetailedProduct />}
-    </main>
-  );
+  return <main>{isLoading ? <Loading /> : <DetailedProduct />}</main>;
 };
 
 ProductDetails.propTypes = {

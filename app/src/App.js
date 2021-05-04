@@ -8,18 +8,20 @@ import {
   ProductDetails,
   LoginRegister,
   Account,
+  Footer,
 } from "./components/Components";
-import useStyles from "./styles";
+import { Loading } from "./components/Extras";
+
+const cartFromSessionStorage = JSON.parse(
+  sessionStorage.getItem("cart") || "[]"
+);
 
 const App = () => {
-  const classes = useStyles();
-
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(cartFromSessionStorage);
   const [id, setId] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
-  // const [cartItemsCount, setCartItemsCount] = useState(0);
 
   const addToCart = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -33,9 +35,6 @@ const App = () => {
     } else {
       setCartItems([...cartItems, { ...product, qty: 1 }]);
     }
-
-    // setCartItemsCount(cartItems.reduce((acc, item) => acc + item.qty, 0));
-    // console.log(cartItemsCount);
   };
 
   const removeFromCart = (product) => {
@@ -56,6 +55,10 @@ const App = () => {
     setCartItems(cartItems.filter((x) => x.id !== product.id));
   };
 
+  window.onbeforeunload = () => {
+    window.scrollTo(0, 0);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -68,13 +71,9 @@ const App = () => {
     fetchData();
   }, []);
 
-  const Loading = () => (
-    <div className={classes.container}>
-      <div className={classes.circle}></div>
-      <div className={classes.circle}></div>
-      <div className={classes.circle}></div>
-    </div>
-  );
+  useEffect(() => {
+    sessionStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   return (
     <>
@@ -111,6 +110,7 @@ const App = () => {
             <LoginRegister loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
           </Route>
         </Switch>
+        <Footer />
       </Router>
     </>
   );

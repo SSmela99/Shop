@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Grid, Typography, Container } from "@material-ui/core";
+import { Grid, Typography, Container, Button, Box } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 import CartItem from "./cartItem/CartItem";
@@ -28,17 +28,21 @@ const Cart = ({ cartItems, addToCart, removeFromCart, deleteItem }) => {
   }, [cartItems]);
 
   const EmptyCart = () => (
-    <Typography variant="subtitle1">
-      Koszyk jest pusty, przejdź do sklepu, aby &nbsp;
-      <Link to="/">dodać przedmioty do koszyka</Link>
-    </Typography>
+    <>
+      <div className={classes.center}>
+        <Typography variant="subtitle1">
+          Koszyk jest pusty, przejdź do sklepu, aby &nbsp;
+          <Link to="/">dodać przedmioty do koszyka</Link>
+        </Typography>
+      </div>
+    </>
   );
 
   const FilledCart = () => (
-    <Container>
-      <main>
-        <Typography variant="h3" align="center" gutterBottom>
-          Cart
+    <Container className={classes.center}>
+      <main style={{ marginBottom: "20px" }}>
+        <Typography variant="h4" align="center" gutterBottom>
+          Koszyk
         </Typography>
         <Grid container justify="center" spacing={4}>
           {cartItems.map((item) => {
@@ -53,13 +57,22 @@ const Cart = ({ cartItems, addToCart, removeFromCart, deleteItem }) => {
             );
           })}
         </Grid>
-        <Typography
-          variant="h6"
-          align="right"
-          style={{ margin: "20px 10px 0 0" }}
+        <Box
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-end",
+            margin: "50px 0",
+            marginRight: "10px",
+          }}
         >
-          Do zapłacenia: {summary} PLN
-        </Typography>
+          <Typography variant="h6" style={{ marginRight: "10px" }}>
+            Do zapłacenia: {summary} PLN
+          </Typography>
+          <Button variant="contained" color="primary">
+            Przejdź do płatności
+          </Button>
+        </Box>
       </main>
     </Container>
   );
@@ -67,7 +80,7 @@ const Cart = ({ cartItems, addToCart, removeFromCart, deleteItem }) => {
   return (
     <>
       <div className={classes.margin} />
-      <div>{cartItems.length === 0 ? <EmptyCart /> : <FilledCart />}</div>
+      {cartItems.length === 0 ? <EmptyCart /> : <FilledCart />}
     </>
   );
 };

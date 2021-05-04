@@ -5,10 +5,11 @@ import bgImage from "../../../assets/accBG.jpg";
 export default makeStyles((theme) => ({
   main: {
     display: "flex",
-    height: "calc(100vh - 84px)",
-    [theme.breakpoints.down("sm")]: {
-      height: "calc(100vh - 64px)",
-    },
+    // height: "calc(100vh - 84px)",
+    // [theme.breakpoints.down("sm")]: {
+    //   height: "calc(100vh - 64px)",
+    // },
+    height: "100%",
   },
   bg: {
     backgroundImage: `url(${bgImage})`,
@@ -16,6 +17,11 @@ export default makeStyles((theme) => ({
     backgroundRepeat: "no-repeat",
     filter: "blur(3px)",
     width: "100%",
+    height: "calc(100vh - 84px)",
+    minHeight: "720px",
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
   margin: {
     minHeight: "84px",
@@ -27,16 +33,51 @@ export default makeStyles((theme) => ({
   },
   account: {
     width: "500px",
-    borderRight: "1px solid black",
+    [theme.breakpoints.down("sm")]: {
+      backgroundImage: `url(${bgImage})`,
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      width: "100%",
+      height: "calc(100vh - 64px)",
+      minHeight: "720px",
+    },
+  },
+  title: {
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: "20px",
+    },
   },
   form: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     marginTop: "20px",
+    [theme.breakpoints.down("sm")]: {
+      backgroundColor: "rgba(255, 255, 255, 0.85)",
+      width: "80%",
+      margin: "30px auto",
+      display: "flex",
+      alignSelf: "center",
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+      height: "100%",
+      margin: 0,
+      paddingBottom: "20px",
+    },
   },
   input: {
     margin: "10px 0",
-    minWidth: "320px",
+    width: "270px",
+    [theme.breakpoints.down("sm")]: {
+      width: "90%",
+    },
+  },
+  checkbox: {
+    display: "flex",
+    maxWidth: "280px",
+    [theme.breakpoints.down("sm")]: {
+      maxWidth: "90%",
+    },
   },
 }));
