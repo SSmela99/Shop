@@ -1,6 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles(() => ({
+  body: {
+    margin: 0,
+  },
   "@keyframes pushup": {
     "0%": {
       marginTop: 0,

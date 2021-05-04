@@ -6,6 +6,8 @@ import {
   Navbar,
   Cart,
   ProductDetails,
+  LoginRegister,
+  Account,
 } from "./components/Components";
 import useStyles from "./styles";
 
@@ -16,6 +18,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [id, setId] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
   // const [cartItemsCount, setCartItemsCount] = useState(0);
 
   const addToCart = (product) => {
@@ -101,11 +104,14 @@ const App = () => {
           <Route exact path={`/product/:id`}>
             <ProductDetails id={id} setId={setId} addToCart={addToCart} />
           </Route>
+          <Route exact path="/account">
+            <Account loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+          </Route>
+          <Route exact path="/account/(register|login)">
+            <LoginRegister loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+          </Route>
         </Switch>
       </Router>
-      <div>
-        <button onClick={() => console.log(products)}>klik</button>
-      </div>
     </>
   );
 };
