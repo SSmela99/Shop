@@ -11,7 +11,7 @@ const Account = ({ loggedIn, setLoggedIn }) => {
   const LoggedIn = () => (
     <>
       <div className={classes.center}>
-        <p style={{ margin: 0 }}>niezalogowany</p>
+        <p style={{ margin: 0 }}>zalogowany</p>
         <button onClick={() => setLoggedIn(false)}>Wyloguj mnie</button>
       </div>
     </>

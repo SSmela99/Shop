@@ -23,6 +23,17 @@ const App = () => {
   const [id, setId] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
 
+  //registration states //
+  const [regUsername, setRegUsername] = useState("");
+  const [regFirstname, setRegFirstname] = useState("");
+  const [regLastname, setRegLastname] = useState("");
+  const [regEmail, setRegEmail] = useState("");
+  const [regPassword, setRegPassword] = useState("");
+
+  //login states //
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
   const addToCart = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
 
@@ -107,7 +118,24 @@ const App = () => {
             <Account loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
           </Route>
           <Route exact path="/account/(register|login)">
-            <LoginRegister loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+            <LoginRegister
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
+              regUsername={regUsername}
+              setRegUsername={setRegUsername}
+              regFirstname={regFirstname}
+              setRegFirstname={setRegFirstname}
+              regLastname={regLastname}
+              setRegLastname={setRegLastname}
+              regEmail={regEmail}
+              setRegEmail={setRegEmail}
+              regPassword={regPassword}
+              setRegPassword={setRegPassword}
+              username={username}
+              setUsername={setUsername}
+              password={password}
+              setPassword={setPassword}
+            />
           </Route>
         </Switch>
         <Footer />
