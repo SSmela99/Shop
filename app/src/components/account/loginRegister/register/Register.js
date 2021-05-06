@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, withRouter, useHistory } from "react-router-dom";
 
 import {
   TextField,
@@ -27,6 +27,7 @@ const Register = ({
   logout,
 }) => {
   const classes = useStyles();
+  let history = useHistory();
 
   const [check, setCheck] = useState(false);
 
@@ -53,6 +54,7 @@ const Register = ({
       setRegPassword("");
 
       setCheck(false);
+      history.push("/account/login");
     } catch (err) {
       console.log(err);
     }
@@ -192,4 +194,4 @@ Register.propTypes = {
   logout: PropTypes.func,
 };
 
-export default Register;
+export default withRouter(Register);
