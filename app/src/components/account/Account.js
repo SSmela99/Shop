@@ -5,14 +5,17 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import LoginRegister from "./loginRegister/LoginRegister";
 import useStyles from "./styles";
 
-const Account = ({ loggedIn, setLoggedIn }) => {
+import { Loading } from "../Extras";
+
+const Account = ({ loggedIn, logout, user }) => {
   const classes = useStyles();
 
   const LoggedIn = () => (
     <>
       <div className={classes.center}>
         <p style={{ margin: 0 }}>zalogowany</p>
-        <button onClick={() => setLoggedIn(false)}>Wyloguj mnie</button>
+        <button onClick={() => logout()}>Wyloguj mnie</button>
+        {user.length === 0 ? <Loading /> : <p>{user[0].user.username}</p>}
       </div>
     </>
   );
@@ -47,6 +50,10 @@ const Account = ({ loggedIn, setLoggedIn }) => {
 Account.propTypes = {
   loggedIn: PropTypes.bool,
   setLoggedIn: PropTypes.any,
+  logout: PropTypes.func,
+  setIsLoading: PropTypes.func,
+  isLoading: PropTypes.bool,
+  user: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 
 export default Account;

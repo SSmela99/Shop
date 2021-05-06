@@ -14,9 +14,23 @@ import { ShoppingCart, AccountBox } from "@material-ui/icons";
 import useStyles from "./styles";
 import Icon from "../../assets/shopIcon.png";
 
-const Navbar = ({ cartItems }) => {
+const Navbar = ({ cartItems, user }) => {
   const classes = useStyles();
   const location = useLocation();
+
+  const UserName = () => (
+    <>
+      <Typography component={Link} to="/account">
+        {user.length === 0 ? (
+          <IconButton component={Link} to="/account">
+            <AccountBox />
+          </IconButton>
+        ) : (
+          `${user[0].user.username}`
+        )}
+      </Typography>
+    </>
+  );
 
   return (
     <>
@@ -27,11 +41,7 @@ const Navbar = ({ cartItems }) => {
             <Typography>Sklep internetowy</Typography>
           </Typography>
           <div className={classes.grow} />
-          {!location.pathname.includes("account") && (
-            <IconButton component={Link} to="/account">
-              <AccountBox />
-            </IconButton>
-          )}
+          {!location.pathname.includes("account") && <UserName />}
           {!location.pathname.includes("cart") && (
             <IconButton component={Link} to="/cart">
               <Badge color="secondary" badgeContent={cartItems.length}>
@@ -47,6 +57,8 @@ const Navbar = ({ cartItems }) => {
 
 Navbar.propTypes = {
   cartItems: PropTypes.array,
+  user: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  loggedIn: PropTypes.bool,
 };
 
 export default Navbar;

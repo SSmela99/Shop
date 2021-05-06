@@ -13,6 +13,7 @@ const Login = ({
   setUsername,
   password,
   setPassword,
+  setUser,
 }) => {
   const classes = useStyles();
   let history = useHistory();
@@ -32,8 +33,9 @@ const Login = ({
 
     if (success) {
       console.log(data);
+      setUser([data]);
       setLoggedIn(true);
-      history.push("/account");
+      history.push("/");
     } else {
       console.log("wystapił błąd");
     }
@@ -92,6 +94,7 @@ Login.propTypes = {
   setUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   password: PropTypes.string,
   setPassword: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  setUser: PropTypes.func,
 };
 
 export default withRouter(Login);

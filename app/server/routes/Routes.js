@@ -44,6 +44,8 @@ router.post("/account/login", async (req, res) => {
         message: `Zalogowałeś się, ${user.username}`,
       },
     });
+
+    console.log(`Zalogowałeś się, ${user.username}`);
   }
 });
 

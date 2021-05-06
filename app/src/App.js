@@ -33,6 +33,7 @@ const App = () => {
   //login states //
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState([]);
 
   const addToCart = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -70,6 +71,13 @@ const App = () => {
     window.scrollTo(0, 0);
   };
 
+  const logout = () => {
+    setPassword("");
+    setUsername("");
+    setLoggedIn(false);
+    setUser([]);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -89,7 +97,7 @@ const App = () => {
   return (
     <>
       <Router>
-        <Navbar cartItems={cartItems} />
+        <Navbar cartItems={cartItems} user={user} loggedIn={loggedIn} />
         <Switch>
           <Route exact path="/">
             {isLoading ? (
@@ -115,7 +123,14 @@ const App = () => {
             <ProductDetails id={id} setId={setId} addToCart={addToCart} />
           </Route>
           <Route exact path="/account">
-            <Account loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+            <Account
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
+              logout={logout}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              user={user}
+            />
           </Route>
           <Route exact path="/account/(register|login)">
             <LoginRegister
@@ -135,6 +150,8 @@ const App = () => {
               setUsername={setUsername}
               password={password}
               setPassword={setPassword}
+              user={user}
+              setUser={setUser}
             />
           </Route>
         </Switch>
