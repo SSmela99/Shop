@@ -35,6 +35,7 @@ const LoginRegister = ({
   setPassword,
   user,
   setUser,
+  logout,
 }) => {
   const classes = useStyles();
   const location = useLocation();
@@ -67,6 +68,7 @@ const LoginRegister = ({
             setPassword={setPassword}
             user={user}
             setUser={setUser}
+            logout={logout}
           />
         )}
 
@@ -95,6 +97,7 @@ LoginRegister.propTypes = {
   setPassword: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   user: PropTypes.string,
   setUser: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  logout: PropTypes.func,
 };
 
 export default LoginRegister;

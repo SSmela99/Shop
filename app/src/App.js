@@ -16,12 +16,20 @@ const cartFromSessionStorage = JSON.parse(
   sessionStorage.getItem("cart") || "[]"
 );
 
+const userFromSessionStorage = JSON.parse(
+  sessionStorage.getItem("user") || "[]"
+);
+
+const isLoggedFromSessionStorage = JSON.parse(
+  sessionStorage.getItem("logged") || false
+);
+
 const App = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [cartItems, setCartItems] = useState(cartFromSessionStorage);
   const [id, setId] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(isLoggedFromSessionStorage);
 
   //registration states //
   const [regUsername, setRegUsername] = useState("");
@@ -33,7 +41,7 @@ const App = () => {
   //login states //
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState(userFromSessionStorage);
 
   const addToCart = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -76,6 +84,8 @@ const App = () => {
     setUsername("");
     setLoggedIn(false);
     setUser([]);
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("logged");
   };
 
   useEffect(() => {
@@ -152,6 +162,7 @@ const App = () => {
               setPassword={setPassword}
               user={user}
               setUser={setUser}
+              logout={logout}
             />
           </Route>
         </Switch>

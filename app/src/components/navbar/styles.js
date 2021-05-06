@@ -29,6 +29,10 @@ export default makeStyles((theme) => ({
       },
     },
   },
+  account: {
+    color: "#fff",
+    textDecoration: "none",
+  },
   headerContainer: {
     transition: ".5s",
     minHeight: "84px",

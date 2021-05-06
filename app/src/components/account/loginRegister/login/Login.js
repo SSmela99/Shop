@@ -3,17 +3,18 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import { Link, withRouter, useHistory } from "react-router-dom";
 
-import { TextField, Button, Typography } from "@material-ui/core";
+import { TextField, Button, Typography, Box } from "@material-ui/core";
 import useStyles from "./styles";
 
 const Login = ({
-  // loggedIn,
+  loggedIn,
   setLoggedIn,
   username,
   setUsername,
   password,
   setPassword,
   setUser,
+  logout,
 }) => {
   const classes = useStyles();
   let history = useHistory();
@@ -31,10 +32,12 @@ const Login = ({
 
     console.log(`success: ${success}`);
 
-    if (success) {
+    if ((success, data)) {
+      setLoggedIn(true);
       console.log(data);
       setUser([data]);
-      setLoggedIn(true);
+      sessionStorage.setItem("user", JSON.stringify([data]));
+      sessionStorage.setItem("logged", JSON.stringify((loggedIn = true)));
       history.push("/");
     } else {
       console.log("wystapił błąd");
@@ -42,48 +45,77 @@ const Login = ({
   };
 
   return (
-    <div className={classes.account}>
-      <form onSubmit={onSubmit} className={classes.form} autoComplete="off">
-        <Typography variant="h6" className={classes.title}>
-          Logowanie
-        </Typography>
-        <TextField
-          name="username"
-          label="username"
-          variant="outlined"
-          className={classes.input}
-          onChange={(e) => setUsername(e.target.value)}
-          value={username}
-          placeholder="username"
-        />
-        <TextField
-          name="password"
-          label="hasło"
-          variant="outlined"
-          className={classes.input}
-          placeholder="hasło"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-          type="password"
-        />
-        <Button
-          variant="contained"
-          type="submit"
-          color="primary"
-          style={{ marginTop: "10px" }}
-        >
-          Zaloguj się
-        </Button>
-        <Typography
-          variant="subtitle1"
-          color="textSecondary"
-          style={{ padding: "20px 0" }}
-        >
-          Nie masz jeszcze konta?&nbsp;
-          <Link to="/account/register">Załóż je tutaj!</Link>
-        </Typography>
-      </form>
-    </div>
+    <>
+      {loggedIn ? (
+        <>
+          <Box className={classes.account}>
+            <Typography variant="subtitle1">
+              sesja w której jesteś posiada zalogowanego użytkownika,&nbsp;
+              <span
+                style={{
+                  fontWeight: "bold",
+                  textDecoration: "underline",
+                  cursor: "pointer",
+                }}
+                onClick={() => logout()}
+              >
+                {" "}
+                Wyloguj się!
+              </span>
+            </Typography>
+          </Box>
+        </>
+      ) : (
+        <>
+          <Box className={classes.account}>
+            <form
+              onSubmit={onSubmit}
+              className={classes.form}
+              autoComplete="off"
+            >
+              <Typography variant="h6" className={classes.title}>
+                Logowanie
+              </Typography>
+              <TextField
+                name="username"
+                label="username"
+                variant="outlined"
+                className={classes.input}
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
+                placeholder="username"
+              />
+              <TextField
+                name="password"
+                label="hasło"
+                variant="outlined"
+                className={classes.input}
+                placeholder="hasło"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                type="password"
+              />
+              <Button
+                variant="contained"
+                type="submit"
+                color="primary"
+                style={{ marginTop: "10px" }}
+              >
+                Zaloguj się
+              </Button>
+              <Typography
+                variant="subtitle1"
+                color="textSecondary"
+                style={{ padding: "20px 0" }}
+              >
+                Nie masz jeszcze konta?&nbsp;
+                <Link to="/account/register">Załóż je tutaj!</Link>
+              </Typography>
+            </form>
+          </Box>
+        </>
+      )}
+    </>
   );
 };
 
@@ -95,6 +127,7 @@ Login.propTypes = {
   password: PropTypes.string,
   setPassword: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   setUser: PropTypes.func,
+  logout: PropTypes.func,
 };
 
 export default withRouter(Login);

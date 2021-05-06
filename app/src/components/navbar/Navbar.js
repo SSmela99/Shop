@@ -20,15 +20,15 @@ const Navbar = ({ cartItems, user }) => {
 
   const UserName = () => (
     <>
-      <Typography component={Link} to="/account">
-        {user.length === 0 ? (
-          <IconButton component={Link} to="/account">
-            <AccountBox />
-          </IconButton>
-        ) : (
-          `${user[0].user.username}`
-        )}
-      </Typography>
+      {user.length === 0 ? (
+        <IconButton component={Link} to="/account">
+          <AccountBox />
+        </IconButton>
+      ) : (
+        <Typography className={classes.account} component={Link} to="/account">
+          {user[0].user.username}
+        </Typography>
+      )}
     </>
   );
 
