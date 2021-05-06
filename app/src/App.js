@@ -42,6 +42,7 @@ const App = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(userFromSessionStorage);
+  const [errMessage, setErrMessage] = useState(false);
 
   const addToCart = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -163,6 +164,8 @@ const App = () => {
               user={user}
               setUser={setUser}
               logout={logout}
+              errMessage={errMessage}
+              setErrMessage={setErrMessage}
             />
           </Route>
         </Switch>

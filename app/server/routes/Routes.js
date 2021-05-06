@@ -19,7 +19,7 @@ router.post("/account/register", (req, res) => {
 });
 
 router.post("/account/login", async (req, res) => {
-  console.log("logging in..");
+  console.log("logowanie..");
 
   const { body } = req;
   const { username, password } = body;
@@ -32,20 +32,34 @@ router.post("/account/login", async (req, res) => {
       },
     });
   } else {
-    const user = await newUserTemplate.findOne({
-      username: username,
-      password: password,
-    });
-
-    res.json({
-      user,
-      info: {
-        success: true,
-        message: `Zalogowałeś się, ${user.username}`,
+    await newUserTemplate.findOne(
+      {
+        username: username,
+        password: password,
       },
-    });
-
-    console.log(`Zalogowałeś się, ${user.username}`);
+      (err, user) => {
+        if (err) {
+          console.log(err);
+        } else if (!user) {
+          console.log("Nie istnieje taki użytkownik!");
+          return res.status(200).json({
+            info: {
+              success: false,
+              message: "Nie istnieje taki użytkownik!",
+            },
+          });
+        } else {
+          console.log(`Zalogowałeś się, ${user.username}`);
+          return res.status(200).json({
+            user,
+            info: {
+              success: true,
+              message: `Zalogowałeś się, ${user.username}`,
+            },
+          });
+        }
+      }
+    );
   }
 });
 

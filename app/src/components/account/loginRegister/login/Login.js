@@ -15,6 +15,8 @@ const Login = ({
   setPassword,
   setUser,
   logout,
+  errMessage,
+  setErrMessage,
 }) => {
   const classes = useStyles();
   let history = useHistory();
@@ -32,88 +34,86 @@ const Login = ({
 
     console.log(`success: ${success}`);
 
-    if ((success, data)) {
+    if (success === true) {
       setLoggedIn(true);
       console.log(data);
       setUser([data]);
       sessionStorage.setItem("user", JSON.stringify([data]));
       sessionStorage.setItem("logged", JSON.stringify((loggedIn = true)));
+      setErrMessage(false);
       history.push("/");
     } else {
-      console.log("wystapił błąd");
+      console.log(data);
+      setErrMessage(true);
     }
   };
 
   return (
     <>
       {loggedIn ? (
-        <>
-          <Box className={classes.account}>
-            <Typography variant="subtitle1">
-              sesja w której jesteś posiada zalogowanego użytkownika,&nbsp;
-              <span
-                style={{
-                  fontWeight: "bold",
-                  textDecoration: "underline",
-                  cursor: "pointer",
-                }}
-                onClick={() => logout()}
-              >
-                {" "}
-                Wyloguj się!
-              </span>
-            </Typography>
-          </Box>
-        </>
-      ) : (
-        <>
-          <Box className={classes.account}>
-            <form
-              onSubmit={onSubmit}
-              className={classes.form}
-              autoComplete="off"
+        <Box className={classes.account}>
+          <Typography variant="subtitle1">
+            sesja w której jesteś posiada już zalogowanego użytkownika,&nbsp;
+            <span
+              style={{
+                fontWeight: "bold",
+                textDecoration: "underline",
+                cursor: "pointer",
+              }}
+              onClick={() => logout()}
             >
-              <Typography variant="h6" className={classes.title}>
-                Logowanie
-              </Typography>
-              <TextField
-                name="username"
-                label="username"
-                variant="outlined"
-                className={classes.input}
-                onChange={(e) => setUsername(e.target.value)}
-                value={username}
-                placeholder="username"
-              />
-              <TextField
-                name="password"
-                label="hasło"
-                variant="outlined"
-                className={classes.input}
-                placeholder="hasło"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                type="password"
-              />
-              <Button
-                variant="contained"
-                type="submit"
-                color="primary"
-                style={{ marginTop: "10px" }}
-              >
-                Zaloguj się
-              </Button>
-              <Typography
-                variant="subtitle1"
-                color="textSecondary"
-                style={{ padding: "20px 0" }}
-              >
-                Nie masz jeszcze konta?&nbsp;
-                <Link to="/account/register">Załóż je tutaj!</Link>
-              </Typography>
-            </form>
-          </Box>
-        </>
+              Wyloguj się!
+            </span>
+          </Typography>
+        </Box>
+      ) : (
+        <Box className={classes.account}>
+          <form onSubmit={onSubmit} className={classes.form} autoComplete="off">
+            <Typography variant="h6" className={classes.title}>
+              Logowanie
+            </Typography>
+            <TextField
+              name="username"
+              label="username"
+              variant="outlined"
+              className={classes.input}
+              onChange={(e) => setUsername(e.target.value)}
+              value={username}
+              placeholder="username"
+              required
+            />
+            <TextField
+              name="password"
+              label="hasło"
+              variant="outlined"
+              className={classes.input}
+              placeholder="hasło"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              type="password"
+              required
+            />
+            <Button
+              variant="contained"
+              type="submit"
+              color="primary"
+              style={{ marginTop: "10px" }}
+            >
+              Zaloguj się
+            </Button>
+            <Typography style={{ color: "red", marginTop: "20px" }}>
+              {errMessage ? "Taki użytkownik nie istnieje!" : null}
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              color="textSecondary"
+              style={{ padding: "20px 0" }}
+            >
+              Nie masz jeszcze konta?&nbsp;
+              <Link to="/account/register">Załóż je tutaj!</Link>
+            </Typography>
+          </form>
+        </Box>
       )}
     </>
   );
@@ -128,6 +128,8 @@ Login.propTypes = {
   setPassword: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   setUser: PropTypes.func,
   logout: PropTypes.func,
+  errMessage: PropTypes.bool,
+  setErrMessage: PropTypes.func,
 };
 
 export default withRouter(Login);
