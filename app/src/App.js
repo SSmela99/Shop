@@ -9,6 +9,7 @@ import {
   LoginRegister,
   Account,
   Footer,
+  Admin,
 } from "./components/Components";
 import { Loading } from "./components/Extras";
 
@@ -22,6 +23,10 @@ const userFromSessionStorage = JSON.parse(
 
 const isLoggedFromSessionStorage = JSON.parse(
   sessionStorage.getItem("logged") || false
+);
+
+const usernameFromSessionStorage = JSON.parse(
+  sessionStorage.getItem("username")
 );
 
 const App = () => {
@@ -40,7 +45,7 @@ const App = () => {
   const [regInfo, setRegInfo] = useState("");
 
   //login states //
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(usernameFromSessionStorage || "");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(userFromSessionStorage);
   const [errMessage, setErrMessage] = useState(false);
@@ -88,6 +93,7 @@ const App = () => {
     setUser([]);
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("logged");
+    sessionStorage.removeItem("username");
   };
 
   useEffect(() => {
@@ -170,6 +176,9 @@ const App = () => {
               regInfo={regInfo}
               setRegInfo={setRegInfo}
             />
+          </Route>
+          <Route exact path="/admin">
+            <Admin username={username} products={products} />
           </Route>
         </Switch>
         <Footer />

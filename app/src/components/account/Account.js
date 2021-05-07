@@ -19,7 +19,7 @@ const Account = ({ loggedIn, logout, user }) => {
             <Loading />
           ) : (
             <Typography variant="subtitle2">
-              zalogowany, {user[0].user.username}
+              Witaj, {user[0].user.username}!
             </Typography>
           )}
           <Button
