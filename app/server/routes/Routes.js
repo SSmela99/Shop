@@ -14,7 +14,12 @@ router.post("/account/register", (req, res) => {
 
   newUser
     .save()
-    .then((data) => res.json(data))
+    .then((data) =>
+      res.json({
+        data,
+        success: true,
+      })
+    )
     .catch((err) => res.json(err));
 });
 

@@ -25,39 +25,46 @@ const Register = ({
   setRegPassword,
   loggedIn,
   logout,
+  regInfo,
+  setRegInfo,
 }) => {
   const classes = useStyles();
   let history = useHistory();
 
   const [check, setCheck] = useState(false);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const registered = {
-        username: regUsername,
-        firstname: regFirstname,
-        lastname: regLastname,
-        email: regEmail.toLowerCase(),
-        password: regPassword.trim(),
-      };
+    const registered = {
+      username: regUsername,
+      firstname: regFirstname,
+      lastname: regLastname,
+      email: regEmail.toLowerCase(),
+      password: regPassword.trim(),
+    };
 
-      axios
-        .post("http://localhost:4000/account/register", registered)
-        .then((response) => console.log(response.data));
+    const sendData = await axios.post(
+      "http://localhost:4000/account/register",
+      registered
+    );
 
-      setRegUsername("");
-      setRegFirstname("");
-      setRegLastname("");
-      setRegEmail("");
-      setRegPassword("");
+    const { data } = sendData;
 
-      setCheck(false);
+    if (data.success === true) {
+      console.log(data.success);
       history.push("/account/login");
-    } catch (err) {
-      console.log(err);
+    } else {
+      console.log(Object.keys(data.keyValue).toString());
+      setRegInfo(Object.keys(data.keyValue).toString());
     }
+
+    setRegUsername("");
+    setRegFirstname("");
+    setRegLastname("");
+    setRegEmail("");
+    setRegPassword("");
+    setCheck(false);
   };
 
   return (
@@ -140,6 +147,11 @@ const Register = ({
               placeholder="hasło"
               type="password"
             />
+            {regInfo.length !== 0 && (
+              <Typography style={{ margin: "10px", color: "red" }}>
+                Podany {regInfo} istnieje już w bazie danych
+              </Typography>
+            )}
             <div className={classes.checkbox}>
               <Checkbox
                 required
@@ -192,6 +204,8 @@ Register.propTypes = {
   setRegPassword: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   loggedIn: PropTypes.bool,
   logout: PropTypes.func,
+  regInfo: PropTypes.any,
+  setRegInfo: PropTypes.any,
 };
 
 export default withRouter(Register);

@@ -33,6 +33,7 @@ const Login = ({
     const { success } = data.info;
 
     console.log(`success: ${success}`);
+    console.log(sendData);
 
     if (success === true) {
       setLoggedIn(true);

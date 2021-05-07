@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import LoginRegister from "./loginRegister/LoginRegister";
+import { Box, Typography, Button } from "@material-ui/core";
 import useStyles from "./styles";
 
 import { Loading } from "../Extras";
@@ -12,20 +13,58 @@ const Account = ({ loggedIn, logout, user }) => {
 
   const LoggedIn = () => (
     <>
-      <div className={classes.center}>
-        <p style={{ margin: 0 }}>zalogowany</p>
-        <button onClick={() => logout()}>Wyloguj mnie</button>
-        {user.length === 0 ? <Loading /> : <p>{user[0].user.username}</p>}
-      </div>
+      <Box className={classes.center}>
+        <Box style={{ textAlign: "center" }}>
+          {user.length === 0 ? (
+            <Loading />
+          ) : (
+            <Typography variant="subtitle2">
+              zalogowany, {user[0].user.username}
+            </Typography>
+          )}
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ marginTop: "10px" }}
+            onClick={() => logout()}
+          >
+            Wyloguj mnie
+          </Button>
+        </Box>
+      </Box>
     </>
   );
 
   const NotLoggedIn = () => (
     <>
-      <div className={classes.center}>
-        <p style={{ margin: 0 }}>niezalogowany</p>
-        <Link to="/account/login">Zaloguj się tutaj!</Link>
-      </div>
+      <Box className={classes.center}>
+        <Typography
+          variant="subtitle2"
+          style={{ margin: 0, textAlign: "center" }}
+        >
+          Jesteś niezalogowany!
+        </Typography>
+        <Box style={{ display: "flex", justifyContent: "center" }}>
+          <Button
+            variant="contained"
+            color="primary"
+            component={Link}
+            to="/account/login"
+            style={{ margin: "10px" }}
+          >
+            Zaloguj się tutaj!
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            component={Link}
+            to="/account/register"
+            style={{ margin: "10px" }}
+          >
+            Zarejestruj się tutaj!
+          </Button>
+        </Box>
+      </Box>
     </>
   );
 

@@ -37,6 +37,7 @@ const App = () => {
   const [regLastname, setRegLastname] = useState("");
   const [regEmail, setRegEmail] = useState("");
   const [regPassword, setRegPassword] = useState("");
+  const [regInfo, setRegInfo] = useState("");
 
   //login states //
   const [username, setUsername] = useState("");
@@ -166,6 +167,8 @@ const App = () => {
               logout={logout}
               errMessage={errMessage}
               setErrMessage={setErrMessage}
+              regInfo={regInfo}
+              setRegInfo={setRegInfo}
             />
           </Route>
         </Switch>

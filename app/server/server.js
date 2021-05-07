@@ -11,6 +11,7 @@ dotenv.config();
 const config = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
+  useCreateIndex: true,
 };
 
 mongoose.connect(process.env.DATABASE_ACCESS_KEY, config, () =>

@@ -38,6 +38,8 @@ const LoginRegister = ({
   logout,
   errMessage,
   setErrMessage,
+  regInfo,
+  setRegInfo,
 }) => {
   const classes = useStyles();
   const location = useLocation();
@@ -61,6 +63,8 @@ const LoginRegister = ({
             setRegPassword={setRegPassword}
             loggedIn={loggedIn}
             logout={logout}
+            regInfo={regInfo}
+            setRegInfo={setRegInfo}
           />
         ) : (
           <Login
@@ -101,11 +105,13 @@ LoginRegister.propTypes = {
   setUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   password: PropTypes.string,
   setPassword: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  user: PropTypes.string,
+  user: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   setUser: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   logout: PropTypes.func,
   errMessage: PropTypes.bool,
   setErrMessage: PropTypes.func,
+  regInfo: PropTypes.any,
+  setRegInfo: PropTypes.any,
 };
 
 export default LoginRegister;
