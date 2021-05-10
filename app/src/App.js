@@ -178,7 +178,11 @@ const App = () => {
             />
           </Route>
           <Route exact path="/admin">
-            <Admin username={username} products={products} />
+            <Admin
+              username={username}
+              products={products}
+              setProducts={setProducts}
+            />
           </Route>
         </Switch>
         <Footer />

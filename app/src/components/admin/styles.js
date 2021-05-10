@@ -10,7 +10,7 @@ export default makeStyles((theme) => ({
     },
   },
   center: {
-    height: "calc(100vh - 100px)",
+    minHeight: "calc(100vh - 100px)",
     [theme.breakpoints.down("sm")]: {
       minHeight: "calc(100vh - 70px)",
     },

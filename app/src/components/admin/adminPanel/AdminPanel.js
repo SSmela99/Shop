@@ -1,37 +1,53 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import { Tabs, Tab, AppBar } from "@material-ui/core";
+import { Tabs, Tab, AppBar, Typography } from "@material-ui/core";
 
 import TabPanel from "./tabPanel/TabPanel";
-import UpdatePanel from "./tabPanel/UpdatePanel";
+import UpdatePanel from "./tabPanel/updatePanel/UpdatePanel";
+import RemovePanel from "./tabPanel/removePanel/RemovePanel";
+import AddPanel from "./tabPanel/addPanel/AddPanel";
 
-const AdminPanel = ({ products }) => {
-  const [value, setValue] = useState(0);
+const AdminPanel = ({ products, setProducts }) => {
+  const [tabValue, setTabValue] = useState(0);
+  const [selectValue, setSelectValue] = useState("");
 
   const handleTabs = (e, val) => {
     console.log(val);
-    setValue(val);
+    setTabValue(val);
   };
 
   return (
     <main>
-      <div>elo</div>
       <AppBar position="static" color="transparent">
-        <Tabs value={value} centered onChange={handleTabs}>
+        <Typography
+          variant="subtitle2"
+          color="textSecondary"
+          style={{ fontSize: "12px", margin: "10px 0" }}
+          align="center"
+        >
+          Panel administracyjny zwraca obiekty z wysłanymi danymi. pamiętaj, nic
+          w rzeczywistości nie zaktualizuje się w bazie danych. Zastosowane
+          metody są takie same jakie podaje dokumentacja FAKESTOREAPI.
+        </Typography>
+        <Tabs value={tabValue} centered onChange={handleTabs}>
           <Tab label="Item 1" />
           <Tab label="Item 2" />
           <Tab label="Item 3" />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
-        <UpdatePanel products={products} />
+      <TabPanel value={tabValue} index={0}>
+        <UpdatePanel
+          products={products}
+          selectValue={selectValue}
+          setSelectValue={setSelectValue}
+        />
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item 2
+      <TabPanel value={tabValue} index={1}>
+        <RemovePanel products={products} setProducts={setProducts} />
       </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item 3
+      <TabPanel value={tabValue} index={2}>
+        <AddPanel />
       </TabPanel>
     </main>
   );
@@ -39,6 +55,7 @@ const AdminPanel = ({ products }) => {
 
 AdminPanel.propTypes = {
   products: PropTypes.array,
+  setProducts: PropTypes.func,
 };
 
 export default AdminPanel;

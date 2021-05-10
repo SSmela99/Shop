@@ -6,7 +6,7 @@ import useStyles from "./styles";
 
 import AdminPanel from "./adminPanel/AdminPanel";
 
-const Admin = ({ username, products }) => {
+const Admin = ({ username, products, setProducts }) => {
   const classes = useStyles();
 
   return (
@@ -14,7 +14,7 @@ const Admin = ({ username, products }) => {
       <Box className={classes.margin} />
       <Box className={classes.center}>
         {username === "admin" ? (
-          <AdminPanel products={products} />
+          <AdminPanel products={products} setProducts={setProducts} />
         ) : (
           <Typography>Nie jesteś zalogowany jako admin!</Typography>
         )}
@@ -26,6 +26,7 @@ const Admin = ({ username, products }) => {
 Admin.propTypes = {
   username: PropTypes.string,
   products: PropTypes.array,
+  setProducts: PropTypes.func,
 };
 
 export default Admin;
