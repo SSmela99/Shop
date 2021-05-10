@@ -21,7 +21,11 @@ const Product = ({ product, addToCart, setId }) => {
         <CardMedia
           image={product.image}
           title={product.title}
-          style={{ height: "100px", backgroundSize: "contain" }}
+          style={{
+            height: "100px",
+            backgroundSize: "contain",
+            marginTop: "20px",
+          }}
         />
         <CardContent>
           <div

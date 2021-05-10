@@ -6,4 +6,12 @@ export default makeStyles(() => ({
     margin: "0 auto",
     padding: "0 10px",
   },
+  flex: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  iconButton: {
+    marginLeft: "10px",
+  },
 }));

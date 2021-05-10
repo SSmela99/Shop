@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import axios from "axios";
 
 import { Select, MenuItem, Box, Typography } from "@material-ui/core";
-// import useStyles from "./styles";
+import useStyles from "./styles";
 
 const UpdatePanel = ({ products, selectValue, setSelectValue }) => {
-  // const classes = useStyles();
+  const classes = useStyles();
+
   //update inputs states
-  const [id, setId] = useState();
+  const [id, setId] = useState("");
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -68,7 +69,7 @@ const UpdatePanel = ({ products, selectValue, setSelectValue }) => {
   }, []);
 
   return (
-    <Box style={{ maxWidth: "600px", margin: "0 auto" }}>
+    <Box className={classes.form}>
       <Typography variant="h5" style={{ margin: "0" }}>
         Zaktualizuj produkt
       </Typography>
@@ -76,7 +77,12 @@ const UpdatePanel = ({ products, selectValue, setSelectValue }) => {
         <Typography variant="subtitle1" style={{ marginRight: "10px" }}>
           Wybierz produkt:
         </Typography>
-        <Select value={selectValue} displayEmpty onChange={updateSelectValue}>
+        <Select
+          value={selectValue}
+          displayEmpty
+          onChange={updateSelectValue}
+          style={{ minWidth: "200px", maxWidth: "370px" }}
+        >
           {products.map((product) => {
             return (
               <MenuItem value={product} key={product.id}>

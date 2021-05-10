@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-import { Typography, IconButton } from "@material-ui/core";
+import useStyles from "./styles";
+
+import { Typography, IconButton, Box } from "@material-ui/core";
 import BackspaceIcon from "@material-ui/icons/Backspace";
 
 const RemovePanel = ({ products, setProducts }) => {
+  const classes = useStyles();
+
   const [id, setId] = useState("");
   const [item, setItem] = useState("");
 
@@ -32,34 +36,27 @@ const RemovePanel = ({ products, setProducts }) => {
 
   return (
     <>
-      <main style={{ maxWidth: "600px", margin: "0 auto" }}>
+      <Box className={classes.form}>
         <Typography variant="h5" style={{ margin: "0" }}>
           Usuń produkt
         </Typography>
         {products.map((product) => {
           return (
-            <div
-              key={product.id}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
+            <Box className={classes.flex} key={product.id}>
               <Typography variant="subtitle2">
                 id {product.id}. {product.title}
               </Typography>
               <IconButton
                 onClick={() => deleteItem(product)}
-                style={{ leftMargin: "10px" }}
+                className={classes.iconButton}
               >
                 <BackspaceIcon />
               </IconButton>
-            </div>
+            </Box>
           );
         })}
         <button onClick={() => console.log(item)}>id</button>
-      </main>
+      </Box>
     </>
   );
 };

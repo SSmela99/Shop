@@ -6,4 +6,15 @@ export default makeStyles(() => ({
     margin: "0 auto",
     padding: "0 10px",
   },
+  flex: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  error: {
+    color: "red",
+    textAlign: "center",
+  },
+  input: {
+    margin: "10px 0",
+  },
 }));

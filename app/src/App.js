@@ -11,7 +11,7 @@ import {
   Footer,
   Admin,
 } from "./components/Components";
-import { Loading } from "./components/Extras";
+import { Loading, NotFound } from "./components/Extras";
 
 const cartFromSessionStorage = JSON.parse(
   sessionStorage.getItem("cart") || "[]"
@@ -138,7 +138,7 @@ const App = () => {
             />
           </Route>
           <Route exact path={`/product/:id`}>
-            <ProductDetails id={id} setId={setId} addToCart={addToCart} />
+            <ProductDetails addToCart={addToCart} products={products} />
           </Route>
           <Route exact path="/account">
             <Account
@@ -184,6 +184,7 @@ const App = () => {
               setProducts={setProducts}
             />
           </Route>
+          <Route component={NotFound}></Route>
         </Switch>
         <Footer />
       </Router>

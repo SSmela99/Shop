@@ -31,9 +31,9 @@ const AdminPanel = ({ products, setProducts }) => {
           metody są takie same jakie podaje dokumentacja FAKESTOREAPI.
         </Typography>
         <Tabs value={tabValue} centered onChange={handleTabs}>
-          <Tab label="Item 1" />
-          <Tab label="Item 2" />
-          <Tab label="Item 3" />
+          <Tab label="Zaktualizuj" />
+          <Tab label="Usuń" />
+          <Tab label="Dodaj" />
         </Tabs>
       </AppBar>
       <TabPanel value={tabValue} index={0}>
@@ -47,7 +47,7 @@ const AdminPanel = ({ products, setProducts }) => {
         <RemovePanel products={products} setProducts={setProducts} />
       </TabPanel>
       <TabPanel value={tabValue} index={2}>
-        <AddPanel />
+        <AddPanel products={products} setProducts={setProducts} />
       </TabPanel>
     </main>
   );

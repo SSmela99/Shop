@@ -15,8 +15,4 @@ export default makeStyles((theme) => ({
       minHeight: "calc(100vh - 70px)",
     },
   },
-  flex: {
-    display: "flex",
-    justifyContent: "center",
-  },
 }));
