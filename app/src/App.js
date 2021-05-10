@@ -36,19 +36,10 @@ const App = () => {
   const [id, setId] = useState("");
   const [loggedIn, setLoggedIn] = useState(isLoggedFromSessionStorage);
 
-  //registration states //
-  const [regUsername, setRegUsername] = useState("");
-  const [regFirstname, setRegFirstname] = useState("");
-  const [regLastname, setRegLastname] = useState("");
-  const [regEmail, setRegEmail] = useState("");
-  const [regPassword, setRegPassword] = useState("");
-  const [regInfo, setRegInfo] = useState("");
-
   //login states //
   const [username, setUsername] = useState(usernameFromSessionStorage || "");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(userFromSessionStorage);
-  const [errMessage, setErrMessage] = useState(false);
 
   const addToCart = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -154,16 +145,6 @@ const App = () => {
             <LoginRegister
               loggedIn={loggedIn}
               setLoggedIn={setLoggedIn}
-              regUsername={regUsername}
-              setRegUsername={setRegUsername}
-              regFirstname={regFirstname}
-              setRegFirstname={setRegFirstname}
-              regLastname={regLastname}
-              setRegLastname={setRegLastname}
-              regEmail={regEmail}
-              setRegEmail={setRegEmail}
-              regPassword={regPassword}
-              setRegPassword={setRegPassword}
               username={username}
               setUsername={setUsername}
               password={password}
@@ -171,10 +152,6 @@ const App = () => {
               user={user}
               setUser={setUser}
               logout={logout}
-              errMessage={errMessage}
-              setErrMessage={setErrMessage}
-              regInfo={regInfo}
-              setRegInfo={setRegInfo}
             />
           </Route>
           <Route exact path="/admin">

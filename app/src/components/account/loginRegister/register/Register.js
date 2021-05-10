@@ -12,26 +12,19 @@ import {
 } from "@material-ui/core";
 import useStyles from "./styles";
 
-const Register = ({
-  regUsername,
-  setRegUsername,
-  regFirstname,
-  setRegFirstname,
-  regLastname,
-  setRegLastname,
-  regEmail,
-  setRegEmail,
-  regPassword,
-  setRegPassword,
-  loggedIn,
-  logout,
-  regInfo,
-  setRegInfo,
-}) => {
+const Register = ({ loggedIn, logout }) => {
   const classes = useStyles();
   let history = useHistory();
 
   const [check, setCheck] = useState(false);
+
+  //registration states
+  const [regUsername, setRegUsername] = useState("");
+  const [regFirstname, setRegFirstname] = useState("");
+  const [regLastname, setRegLastname] = useState("");
+  const [regEmail, setRegEmail] = useState("");
+  const [regPassword, setRegPassword] = useState("");
+  const [regInfo, setRegInfo] = useState("");
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -192,20 +185,8 @@ const Register = ({
 };
 
 Register.propTypes = {
-  regUsername: PropTypes.any,
-  setRegUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  regFirstname: PropTypes.string,
-  setRegFirstname: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  regLastname: PropTypes.string,
-  setRegLastname: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  regEmail: PropTypes.string,
-  setRegEmail: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  regPassword: PropTypes.string,
-  setRegPassword: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   loggedIn: PropTypes.bool,
   logout: PropTypes.func,
-  regInfo: PropTypes.any,
-  setRegInfo: PropTypes.any,
 };
 
 export default withRouter(Register);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { Link, withRouter, useHistory } from "react-router-dom";
@@ -15,11 +15,11 @@ const Login = ({
   setPassword,
   setUser,
   logout,
-  errMessage,
-  setErrMessage,
 }) => {
   const classes = useStyles();
   let history = useHistory();
+
+  const [errMessage, setErrMessage] = useState(false);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -130,8 +130,6 @@ Login.propTypes = {
   setPassword: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   setUser: PropTypes.func,
   logout: PropTypes.func,
-  errMessage: PropTypes.bool,
-  setErrMessage: PropTypes.func,
 };
 
 export default withRouter(Login);

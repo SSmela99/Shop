@@ -1,34 +1,16 @@
 import React from "react";
-// import axios from "axios";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
-// import { Link } from "react-router-dom";
 
 import Register from "./register/Register";
 import Login from "./login/Login";
 
-import {
-  CssBaseline,
-  // TextField,
-  // Button,
-  // Typography,
-  // Checkbox,
-} from "@material-ui/core";
+import { CssBaseline } from "@material-ui/core";
 import useStyles from "./styles";
 
 const LoginRegister = ({
   loggedIn,
   setLoggedIn,
-  regUsername,
-  setRegUsername,
-  regFirstname,
-  setRegFirstname,
-  regLastname,
-  setRegLastname,
-  regEmail,
-  setRegEmail,
-  regPassword,
-  setRegPassword,
   username,
   setUsername,
   password,
@@ -36,10 +18,6 @@ const LoginRegister = ({
   user,
   setUser,
   logout,
-  errMessage,
-  setErrMessage,
-  regInfo,
-  setRegInfo,
 }) => {
   const classes = useStyles();
   const location = useLocation();
@@ -50,22 +28,7 @@ const LoginRegister = ({
       <div className={classes.margin} />
       <main className={classes.main}>
         {location.pathname === "/account/register" ? (
-          <Register
-            regUsername={regUsername}
-            setRegUsername={setRegUsername}
-            regFirstname={regFirstname}
-            setRegFirstname={setRegFirstname}
-            regLastname={regLastname}
-            setRegLastname={setRegLastname}
-            regEmail={regEmail}
-            setRegEmail={setRegEmail}
-            regPassword={regPassword}
-            setRegPassword={setRegPassword}
-            loggedIn={loggedIn}
-            logout={logout}
-            regInfo={regInfo}
-            setRegInfo={setRegInfo}
-          />
+          <Register loggedIn={loggedIn} logout={logout} />
         ) : (
           <Login
             loggedIn={loggedIn}
@@ -77,8 +40,6 @@ const LoginRegister = ({
             user={user}
             setUser={setUser}
             logout={logout}
-            errMessage={errMessage}
-            setErrMessage={setErrMessage}
           />
         )}
 
@@ -91,16 +52,6 @@ const LoginRegister = ({
 LoginRegister.propTypes = {
   loggedIn: PropTypes.bool,
   setLoggedIn: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  regUsername: PropTypes.any,
-  setRegUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  regFirstname: PropTypes.string,
-  setRegFirstname: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  regLastname: PropTypes.string,
-  setRegLastname: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  regEmail: PropTypes.string,
-  setRegEmail: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  regPassword: PropTypes.string,
-  setRegPassword: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   username: PropTypes.string,
   setUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   password: PropTypes.string,
@@ -108,10 +59,6 @@ LoginRegister.propTypes = {
   user: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   setUser: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   logout: PropTypes.func,
-  errMessage: PropTypes.bool,
-  setErrMessage: PropTypes.func,
-  regInfo: PropTypes.any,
-  setRegInfo: PropTypes.any,
 };
 
 export default LoginRegister;
