@@ -30,7 +30,14 @@ const Cart = ({ cartItems, addToCart, removeFromCart, deleteItem }) => {
   const EmptyCart = () => (
     <>
       <div className={classes.center}>
-        <Typography variant="subtitle1">
+        <Typography
+          variant="subtitle2"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            fontSize: "20px",
+          }}
+        >
           Koszyk jest pusty, przejdź do sklepu, aby &nbsp;
           <Link to="/">dodać przedmioty do koszyka</Link>
         </Typography>

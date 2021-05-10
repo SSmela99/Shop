@@ -4,9 +4,7 @@ import PropTypes from "prop-types";
 const TabPanel = ({ children, value, index }) => {
   return (
     <>
-      <div className="elo" style={{ minHeight: "auto" }}>
-        {value === index && <h1>{children}</h1>}
-      </div>
+      <div>{value === index && <h1>{children}</h1>}</div>
     </>
   );
 };

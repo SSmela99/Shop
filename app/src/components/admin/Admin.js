@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-import { Box, Typography } from "@material-ui/core";
+import { Box, Typography, Button } from "@material-ui/core";
 import useStyles from "./styles";
 
 import AdminPanel from "./adminPanel/AdminPanel";
@@ -16,7 +17,21 @@ const Admin = ({ username, products, setProducts }) => {
         {username === "admin" ? (
           <AdminPanel products={products} setProducts={setProducts} />
         ) : (
-          <Typography>Nie jesteś zalogowany jako admin!</Typography>
+          <Box className={classes.flex}>
+            <Box style={{ textAlign: "center" }}>
+              <Typography variant="subtitle2" style={{ fontSize: "16px" }}>
+                Nie jesteś zalogowany jako admin!
+              </Typography>
+              <Button
+                component={Link}
+                to="/account/login"
+                variant="contained"
+                color="primary"
+              >
+                Przejdź do logowania
+              </Button>
+            </Box>
+          </Box>
         )}
       </Box>
     </>

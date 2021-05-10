@@ -9,7 +9,7 @@ import {
   Badge,
   IconButton,
 } from "@material-ui/core";
-import { ShoppingCart, AccountBox } from "@material-ui/icons";
+import { ShoppingCart, AccountBox, Assessment } from "@material-ui/icons";
 
 import useStyles from "./styles";
 import Icon from "../../assets/shopIcon.png";
@@ -42,6 +42,11 @@ const Navbar = ({ cartItems, user }) => {
           </Typography>
           <div className={classes.grow} />
           {!location.pathname.includes("account") && <UserName />}
+          {!location.pathname.includes("admin") && (
+            <IconButton component={Link} to="/admin">
+              <Assessment />
+            </IconButton>
+          )}
           {!location.pathname.includes("cart") && (
             <IconButton component={Link} to="/cart">
               <Badge color="secondary" badgeContent={cartItems.length}>

@@ -32,6 +32,7 @@ export default makeStyles((theme) => ({
   account: {
     color: "#fff",
     textDecoration: "none",
+    marginRight: "10px",
   },
   headerContainer: {
     transition: ".5s",
