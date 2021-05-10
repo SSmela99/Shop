@@ -5,3 +5,4 @@ export { default as ProductDetails } from "./products/product/productDetails/Pro
 export { default as Account } from "./account/Account";
 export { default as LoginRegister } from "./account/loginRegister/LoginRegister";
 export { default as Footer } from "./footer/Footer";
+export { default as Admin } from "./admin/Admin";

@@ -41,6 +41,7 @@ const Login = ({
       setUser([data]);
       sessionStorage.setItem("user", JSON.stringify([data]));
       sessionStorage.setItem("logged", JSON.stringify((loggedIn = true)));
+      sessionStorage.setItem("username", JSON.stringify(username));
       setErrMessage(false);
       history.push("/");
     } else {
@@ -53,8 +54,8 @@ const Login = ({
     <>
       {loggedIn ? (
         <Box className={classes.account}>
-          <Typography variant="subtitle1">
-            sesja w której jesteś posiada już zalogowanego użytkownika,&nbsp;
+          <Typography variant="subtitle1" style={{ padding: "20px" }}>
+            Sesja w której jesteś posiada już zalogowanego użytkownika,&nbsp;
             <span
               style={{
                 fontWeight: "bold",
