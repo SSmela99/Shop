@@ -6,3 +6,4 @@ export { default as Account } from "./account/Account";
 export { default as LoginRegister } from "./account/loginRegister/LoginRegister";
 export { default as Footer } from "./footer/Footer";
 export { default as Admin } from "./admin/Admin";
+export { default as Checkout } from "./cart/checkout/Checkout";

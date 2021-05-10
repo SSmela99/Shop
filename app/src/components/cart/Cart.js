@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Grid, Typography, Container, Button, Box } from "@material-ui/core";
 import { Link } from "react-router-dom";
@@ -6,9 +6,15 @@ import { Link } from "react-router-dom";
 import CartItem from "./cartItem/CartItem";
 import useStyles from "./styles";
 
-const Cart = ({ cartItems, addToCart, removeFromCart, deleteItem }) => {
+const Cart = ({
+  cartItems,
+  addToCart,
+  removeFromCart,
+  deleteItem,
+  summary,
+  setSummary,
+}) => {
   const classes = useStyles();
-  const [summary, setSummary] = useState([]);
 
   const getSummary = () => {
     const arr = [];
@@ -76,7 +82,12 @@ const Cart = ({ cartItems, addToCart, removeFromCart, deleteItem }) => {
           <Typography variant="h6" style={{ marginRight: "10px" }}>
             Do zapłacenia: {summary} PLN
           </Typography>
-          <Button variant="contained" color="primary">
+          <Button
+            component={Link}
+            to="/checkout"
+            variant="contained"
+            color="primary"
+          >
             Przejdź do płatności
           </Button>
         </Box>
@@ -97,6 +108,8 @@ Cart.propTypes = {
   addToCart: PropTypes.func,
   removeFromCart: PropTypes.func,
   deleteItem: PropTypes.func,
+  summary: PropTypes.any,
+  setSummary: PropTypes.func,
 };
 
 export default Cart;

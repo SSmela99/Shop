@@ -10,6 +10,7 @@ import {
   Account,
   Footer,
   Admin,
+  Checkout,
 } from "./components/Components";
 import { Loading, NotFound } from "./components/Extras";
 
@@ -40,6 +41,9 @@ const App = () => {
   const [username, setUsername] = useState(usernameFromSessionStorage || "");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(userFromSessionStorage);
+
+  //cart states
+  const [summary, setSummary] = useState([]);
 
   const addToCart = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -126,6 +130,15 @@ const App = () => {
               addToCart={addToCart}
               removeFromCart={removeFromCart}
               deleteItem={deleteItem}
+              summary={summary}
+              setSummary={setSummary}
+            />
+          </Route>
+          <Route path="/checkout">
+            <Checkout
+              loggedIn={loggedIn}
+              cartItems={cartItems}
+              summary={summary}
             />
           </Route>
           <Route exact path={`/product/:id`}>
