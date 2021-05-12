@@ -10,6 +10,8 @@ import {
   Account,
   Footer,
   Admin,
+  Checkout,
+  Review,
 } from "./components/Components";
 import { Loading, NotFound } from "./components/Extras";
 
@@ -40,6 +42,12 @@ const App = () => {
   const [username, setUsername] = useState(usernameFromSessionStorage || "");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(userFromSessionStorage);
+
+  //cart states
+  const [summary, setSummary] = useState([]);
+
+  //review states
+  const [shippingData, setShippingData] = useState([]);
 
   const addToCart = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -126,7 +134,20 @@ const App = () => {
               addToCart={addToCart}
               removeFromCart={removeFromCart}
               deleteItem={deleteItem}
+              summary={summary}
+              setSummary={setSummary}
             />
+          </Route>
+          <Route exact path="/checkout">
+            <Checkout
+              loggedIn={loggedIn}
+              cartItems={cartItems}
+              summary={summary}
+              setShippingData={setShippingData}
+            />
+          </Route>
+          <Route exact path="/checkout/review">
+            <Review shippingData={shippingData} summary={summary} />
           </Route>
           <Route exact path={`/product/:id`}>
             <ProductDetails addToCart={addToCart} products={products} />
