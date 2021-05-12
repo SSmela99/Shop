@@ -11,6 +11,7 @@ import {
   Footer,
   Admin,
   Checkout,
+  Review,
 } from "./components/Components";
 import { Loading, NotFound } from "./components/Extras";
 
@@ -44,6 +45,9 @@ const App = () => {
 
   //cart states
   const [summary, setSummary] = useState([]);
+
+  //review states
+  const [shippingData, setShippingData] = useState([]);
 
   const addToCart = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -134,12 +138,16 @@ const App = () => {
               setSummary={setSummary}
             />
           </Route>
-          <Route path="/checkout">
+          <Route exact path="/checkout">
             <Checkout
               loggedIn={loggedIn}
               cartItems={cartItems}
               summary={summary}
+              setShippingData={setShippingData}
             />
+          </Route>
+          <Route exact path="/checkout/review">
+            <Review shippingData={shippingData} summary={summary} />
           </Route>
           <Route exact path={`/product/:id`}>
             <ProductDetails addToCart={addToCart} products={products} />

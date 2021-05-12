@@ -7,26 +7,32 @@ import AddressForm from "./addressForm/AddressForm";
 import useStyles from "./styles";
 import { Box, Typography, Card } from "@material-ui/core";
 
-const Review = ({ loggedIn, cartItems, summary }) => {
+const Review = ({ loggedIn, cartItems, summary, setShippingData }) => {
   const classes = useStyles();
 
   return (
     <>
       <Box className={classes.margin} />
-      <Box className={classes.center}>
+      <Box
+        className={classes.center}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         {loggedIn ? (
           cartItems.length !== 0 ? (
             <Card
               style={{
-                display: "flex",
-                justifyContent: "center",
-                maxWidth: "700px",
-                flexFlow: "wrap",
-                margin: "0 auto",
-                padding: "20px 0",
+                maxWidth: "500px",
+                padding: "20px",
               }}
             >
-              <AddressForm summary={summary} />
+              <AddressForm
+                summary={summary}
+                setShippingData={setShippingData}
+              />
             </Card>
           ) : (
             <Box>
@@ -52,7 +58,8 @@ const Review = ({ loggedIn, cartItems, summary }) => {
 Review.propTypes = {
   loggedIn: PropTypes.bool,
   cartItems: PropTypes.array,
-  summary: PropTypes.string,
+  summary: PropTypes.any,
+  setShippingData: PropTypes.func,
 };
 
 export default Review;
