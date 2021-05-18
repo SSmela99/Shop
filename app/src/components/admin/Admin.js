@@ -22,6 +22,8 @@ const Admin = ({ username, products, setProducts }) => {
               <Typography variant="subtitle2" style={{ fontSize: "16px" }}>
                 Nie jesteś zalogowany jako admin!
               </Typography>
+              <Typography variant="subtitle2">Login: admin</Typography>
+              <Typography variant="subtitle2">hasło: admin</Typography>
               <Button
                 component={Link}
                 to="/account/login"

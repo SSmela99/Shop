@@ -2,7 +2,14 @@ import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-import { Select, MenuItem, Box, Typography } from "@material-ui/core";
+import {
+  Select,
+  MenuItem,
+  Box,
+  Typography,
+  TextField,
+  TextareaAutosize,
+} from "@material-ui/core";
 import useStyles from "./styles";
 
 const UpdatePanel = ({ products, selectValue, setSelectValue }) => {
@@ -102,36 +109,61 @@ const UpdatePanel = ({ products, selectValue, setSelectValue }) => {
             maxWidth: "500px",
           }}
         >
-          <label>Id:</label>
-          <input
+          <TextField
             ref={idRef}
             onChange={(e) => setId(e.target.value)}
             value={id || selectValue.id}
             disabled
+            label="id"
+            variant="outlined"
+            gutterBottom
           />
-          <label>Title:</label>
-          <input
+          <Typography gutterBottom>
+            id: {id === "" ? selectValue.id : id}
+          </Typography>
+          <TextField
             ref={titleRef}
             onChange={(e) => setTitle(e.target.value)}
-            value={title || selectValue.title}
+            value={title}
+            placeholder={selectValue.title}
+            label="title"
+            variant="outlined"
           />
-          <label>Price:</label>
-          <input
+
+          <Typography gutterBottom>
+            title: {title === "" ? selectValue.title : title}
+          </Typography>
+
+          <TextField
             ref={priceRef}
             onChange={(e) => setPrice(e.target.value)}
-            value={price || selectValue.price}
+            value={price}
+            placeholder={selectValue.price}
+            label="price"
+            variant="outlined"
           />
-          <label>Description:</label>
-          <textarea
+          <Typography gutterBottom>
+            price: {price === "" ? selectValue.price : price}
+          </Typography>
+
+          <TextareaAutosize
             ref={descriptionRef}
             onChange={(e) => setDescription(e.target.value)}
-            value={description || selectValue.description}
+            value={description}
             style={{ resize: "none", height: "100px" }}
+            label="description"
+            variant="outlined"
+            placeholder={selectValue.description}
           />
+          <Typography gutterBottom>
+            description:{" "}
+            {description === "" ? selectValue.description : description}
+          </Typography>
           <Select
             value={category || selectValue.category}
             ref={categoryRef}
             onChange={updateSelectCategory}
+            variant="outlined"
           >
             {categories.map((category) => {
               return (
